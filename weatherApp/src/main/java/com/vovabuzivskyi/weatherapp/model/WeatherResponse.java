@@ -107,6 +107,8 @@ public class WeatherResponse {
     }
 
     public static class Wind {
+        private double speed;
+
         public double getSpeed() {
             return speed;
         }
@@ -114,8 +116,6 @@ public class WeatherResponse {
         public void setSpeed(double speed) {
             this.speed = speed;
         }
-
-        private double speed;
 
     }
 

@@ -91,27 +91,14 @@
     <a th:href="@{/get_forecast}">Forecast</a>
     <!--    <a th:href="@{/contact}">Contact</a>-->
 </div>
-
-<h1>Weather Ok</h1>
+<h1>Weather OK</h1>
 
 <form action="/show_weather" method="get">
-    <input type="text" name="city" placeholder="Enter city name">
+    <label>
+        <input type="text" name="city" placeholder="Enter city name">
+    </label>
     <button type="submit">Get Weather</button>
 </form>
 
-<div class="container">
-
-    <div th:if="${error}" class="error">
-        <p th:text="${error}"></p>
-    </div>
-    <div th:if="${city}">
-        <h1>Weather Information</h1>
-        <p><strong>City:</strong> <span th:text="${city}"></span>,<span th:text="${country}"></span></p>
-        <p><strong>Probability of precipitation:</strong> <span th:text="${weatherDescription}"></span></p>
-        <p><strong>Temperature:</strong> <span th:text="${temperature} + ' °C'"></span></p>
-        <p><strong>Humidity:</strong> <span th:text="${humidity} + ' %'"></span></p>
-        <p><strong>Wind speed:</strong> <span th:text="${windSpeed} + ' m/s'"></span></p>
-    </div>
-</div>
 </body>
 </html>

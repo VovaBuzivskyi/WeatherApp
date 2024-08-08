@@ -92,26 +92,29 @@
     <!--    <a th:href="@{/contact}">Contact</a>-->
 </div>
 
-<h1>Weather Ok</h1>
+<h1>Weather OK</h1>
 
-<form action="/show_weather" method="get">
-    <input type="text" name="city" placeholder="Enter city name">
-    <button type="submit">Get Weather</button>
+<form action="/show_forecast" method="get">
+    <input type="text" name="city" placeholder="Enter city name" required>
+    <button type="submit">Get Forecast</button>
 </form>
 
-<div class="container">
+<div th:if="${datalist != null}">
+    <h2>5-Day Weather Forecast for<p><strong></strong> <span th:text="${cityData.getName()}"></span>
+        ,<span th:text="${cityData.getCountry()}"></span></p></h2>
 
-    <div th:if="${error}" class="error">
-        <p th:text="${error}"></p>
-    </div>
-    <div th:if="${city}">
-        <h1>Weather Information</h1>
-        <p><strong>City:</strong> <span th:text="${city}"></span>,<span th:text="${country}"></span></p>
-        <p><strong>Probability of precipitation:</strong> <span th:text="${weatherDescription}"></span></p>
-        <p><strong>Temperature:</strong> <span th:text="${temperature} + ' °C'"></span></p>
-        <p><strong>Humidity:</strong> <span th:text="${humidity} + ' %'"></span></p>
-        <p><strong>Wind speed:</strong> <span th:text="${windSpeed} + ' m/s'"></span></p>
+    <div th:each="item : ${datalist}">
+        <p><strong>Weather for date:</strong> <span th:text="${item.getDt_txt()}"></span></p>
+        <p><strong>Probability of precipitation:</strong> <span
+                th:text="${item.getWeather().get(0).getDescription()}"></span></p>
+        <p><strong>Temperature:</strong> <span th:text="${item.getMain().getTemp()} + ' °C'"></span></p>
+        <p><strong>Humidity:</strong> <span th:text="${item.getMain().getHumidity()} + ' %'"></span></p>
+        <p><strong>Wind speed:</strong> <span th:text="${item.getWind().getSpeed()} + ' m/s'"></span></p>
+        <!--        <p><strong>Wind speed:</strong> <span th:text="${} + ' m/s'"></span></p>-->
+
+
     </div>
 </div>
+
 </body>
 </html>

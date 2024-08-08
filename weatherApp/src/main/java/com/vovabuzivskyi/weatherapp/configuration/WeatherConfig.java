@@ -9,7 +9,16 @@ import org.springframework.context.annotation.Configuration;
 public class WeatherConfig {
 
     private String apiKey;
-    private String url;
+    private String weatherUrl;
+    private String forecastUrl;
+
+    public String getForecastUrl() {
+        return forecastUrl;
+    }
+
+    public void setForecastUrl(String forecastUrl) {
+        this.forecastUrl = forecastUrl;
+    }
 
     public String getApiKey() {
         return apiKey;
@@ -19,11 +28,11 @@ public class WeatherConfig {
         this.apiKey = apiKey;
     }
 
-    public String getUrl() {
-        return url;
+    public String getWeatherUrl() {
+        return weatherUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setWeatherUrl(String url) {
+        this.weatherUrl = url;
     }
 }
