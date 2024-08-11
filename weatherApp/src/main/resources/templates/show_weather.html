@@ -86,10 +86,8 @@
 <body>
 
 <div class="navbar">
-    <!--    <a th:href="@{/home}">Home</a>-->
     <a th:href="@{/get_weather}">Weather</a>
     <a th:href="@{/get_forecast}">Forecast</a>
-    <!--    <a th:href="@{/contact}">Contact</a>-->
 </div>
 
 <h1>Weather Ok</h1>
@@ -105,9 +103,9 @@
         <p th:text="${error}"></p>
     </div>
     <div th:if="${city}">
-        <h1>Weather Information</h1>
-        <p><strong>City:</strong> <span th:text="${city}"></span>,<span th:text="${country}"></span></p>
-        <p><strong>Probability of precipitation:</strong> <span th:text="${weatherDescription}"></span></p>
+        <h2>Weather information for </strong> <span th:text="${city}"></span>,<span th:text="${country}"></span></h2>
+
+        <p><strong>Weather:</strong> <span th:text="${weatherDescription}"></span></p>
         <p><strong>Temperature:</strong> <span th:text="${temperature} + ' °C'"></span></p>
         <p><strong>Humidity:</strong> <span th:text="${humidity} + ' %'"></span></p>
         <p><strong>Wind speed:</strong> <span th:text="${windSpeed} + ' m/s'"></span></p>

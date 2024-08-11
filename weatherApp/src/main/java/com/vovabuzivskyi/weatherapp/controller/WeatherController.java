@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 
 @Controller()
 public class WeatherController {
@@ -52,6 +57,11 @@ public class WeatherController {
         if (forecastData != null) {
             model.addAttribute("cityData", forecastData.getCity());
             model.addAttribute("datalist", forecastData.getList());
+            Map<String, List<ForecastResponse.WeatherData>> groupedData = forecastData.getList().stream()
+                    .collect(Collectors.groupingBy(data -> data.getDt_txt().substring(0, 10))); // Group by date (yyyy-MM-dd)
+            // Sort the map by date
+            Map<String, List<ForecastResponse.WeatherData>> sortedGroupedData = new TreeMap<>(groupedData);
+            model.addAttribute("groupedData", sortedGroupedData);
             return "show_forecast";
         } else
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "City not found");
@@ -59,7 +69,7 @@ public class WeatherController {
 
     @ExceptionHandler(HttpClientErrorException.class)
     public String handleHttpClientErrorException(HttpClientErrorException e, Model model) {
-        model.addAttribute("errorMessage", "City with such name doesn't exist");
+        model.addAttribute("errorMessage", "City with such name doesn't exist //n check the spelling");
         return "error_page";
     }
 }

@@ -115,7 +115,7 @@ public class ForecastResponse {
         }
     }
 
-    static class WeatherData {
+    public static class WeatherData {
         private long dt;
         private Main main;
         private List<Weather> weather;
@@ -275,8 +275,8 @@ public class ForecastResponse {
             this.feels_like = feels_like;
         }
 
-        public double getTemp() {
-            return Math.round(temp);
+        public int getTemp() {
+            return (int) Math.round(temp);
         }
 
         public void setTemp(double temp) {
@@ -335,7 +335,6 @@ public class ForecastResponse {
             this.all = all;
         }
 
-
     }
 
     static class Wind {
@@ -382,14 +381,5 @@ public class ForecastResponse {
 
     }
 
-    @Override
-    public String toString() {
-        return "ForecastResponse{" +
-                "cod='" + cod + '\'' +
-                ", message=" + message +
-                ", cnt=" + cnt +
-                ", list=" + list +
-                '}';
-    }
 }
 

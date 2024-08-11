@@ -81,15 +81,28 @@
         .weather-data h3, .weather-data pre {
             color: #555;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
 
 <div class="navbar">
-    <!--    <a th:href="@{/home}">Home</a>-->
     <a th:href="@{/get_weather}">Weather</a>
     <a th:href="@{/get_forecast}">Forecast</a>
-    <!--    <a th:href="@{/contact}">Contact</a>-->
 </div>
 
 <h1>Weather OK</h1>
@@ -100,19 +113,32 @@
 </form>
 
 <div th:if="${datalist != null}">
-    <h2>5-Day Weather Forecast for<p><strong></strong> <span th:text="${cityData.getName()}"></span>
-        ,<span th:text="${cityData.getCountry()}"></span></p></h2>
+    <h2>5-day weather forecast for<strong></strong> <span th:text="${cityData.getName()}"></span>
+        ,<span th:text="${cityData.getCountry()}"></span></h2>
 
-    <div th:each="item : ${datalist}">
-        <p><strong>Weather for date:</strong> <span th:text="${item.getDt_txt()}"></span></p>
-        <p><strong>Probability of precipitation:</strong> <span
-                th:text="${item.getWeather().get(0).getDescription()}"></span></p>
-        <p><strong>Temperature:</strong> <span th:text="${item.getMain().getTemp()} + ' °C'"></span></p>
-        <p><strong>Humidity:</strong> <span th:text="${item.getMain().getHumidity()} + ' %'"></span></p>
-        <p><strong>Wind speed:</strong> <span th:text="${item.getWind().getSpeed()} + ' m/s'"></span></p>
-        <!--        <p><strong>Wind speed:</strong> <span th:text="${} + ' m/s'"></span></p>-->
+    <div th:each="entry : ${groupedData}">
+        <h2>Date: <span th:text="${entry.key}"></span></h2> <!-- Display the date -->
 
-
+        <table>
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>Weather</th>
+                <th>Temperature (°C)</th>
+                <th>Humidity (%)</th>
+                <th>Wind Speed (m/s)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${entry.value}">
+                <td><span th:text="${item.getDt_txt().substring(11, 16)}"></span></td>
+                <td><span th:text="${item.getWeather().get(0).getDescription()}"></span></td>
+                <td><span th:text="${item.getMain().getTemp()} + ' °C'"></span></td>
+                <td><span th:text="${item.getMain().getHumidity()} + ' %'"></span></td>
+                <td><span th:text="${item.getWind().getSpeed()} + ' m/s'"></span></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

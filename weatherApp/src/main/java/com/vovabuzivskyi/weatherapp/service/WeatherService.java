@@ -2,16 +2,10 @@ package com.vovabuzivskyi.weatherapp.service;
 
 
 import com.vovabuzivskyi.weatherapp.configuration.WeatherConfig;
-
 import com.vovabuzivskyi.weatherapp.model.ForecastResponse;
 import com.vovabuzivskyi.weatherapp.model.WeatherResponse;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 @Service
