@@ -2,9 +2,8 @@ package com.vovabuzivskyi.weatherapp.service;
 
 
 import com.vovabuzivskyi.weatherapp.configuration.WeatherConfig;
-import com.vovabuzivskyi.weatherapp.model.ForecastResponse;
 import com.vovabuzivskyi.weatherapp.model.WeatherResponse;
-import org.slf4j.*;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -23,20 +22,12 @@ public class WeatherService {
         this.restTemplateBuilder = restTemplateBuilder;
     }
 
-
     public WeatherResponse getWeather(String city) {
-        log.debug("Method getWeather(WeatherService): city = {}", city + " started work"); ;
+        log.debug("Method getWeather(WeatherService): city = {}", city + " started work");
+        ;
         String weatherUrl = weatherConfig.getWeatherUrl().replace("{city}", city).replace("{apiKey}", weatherConfig.getApiKey());
         log.debug("Weather received from weather API for city: {}", city);
         return restTemplateBuilder.build().getForObject(weatherUrl, WeatherResponse.class);
-    }
-
-
-    public ForecastResponse getForecast(String city) {
-        String forecastUrl = weatherConfig.getForecastUrl().replace("{city}", city).replace("{apiKey}", weatherConfig.getApiKey());
-        log.debug("Forecast received from weather API for city: {}", city);
-        return restTemplateBuilder.build().getForObject(forecastUrl, ForecastResponse.class);
-
     }
 
 }

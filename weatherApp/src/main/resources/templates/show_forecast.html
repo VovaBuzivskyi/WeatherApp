@@ -112,11 +112,11 @@
     <button type="submit">Get Forecast</button>
 </form>
 
-<div th:if="${datalist != null}">
-    <h2>5-day weather forecast for<strong></strong> <span th:text="${cityData.getName()}"></span>
+<div th:if="${dataListOfAllDaysForecast != null}">
+    <h2>5-day weather forecast for <span th:text="${cityData.getName()}"></span>
         ,<span th:text="${cityData.getCountry()}"></span></h2>
 
-    <div th:each="entry : ${groupedData}">
+    <div th:each="entry : ${groupedDataByDateAndTime}">
         <h2>Date: <span th:text="${entry.key}"></span></h2> <!-- Display the date -->
 
         <table>

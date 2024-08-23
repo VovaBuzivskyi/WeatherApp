@@ -2,10 +2,10 @@ package com.vovabuzivskyi.weatherapp.model;
 
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class WeatherResponse {
-
     private String name;
     private Sys sys;
     private List<Weather> weather;
@@ -62,6 +62,7 @@ public class WeatherResponse {
         public void setCountry(String country) {
             this.country = country;
         }
+
     }
 
     public static class Weather {
@@ -83,6 +84,19 @@ public class WeatherResponse {
         public void setDescription(String description) {
             this.description = description;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Weather weather = (Weather) o;
+            return id == weather.id && Objects.equals(description, weather.description);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, description);
+        }
     }
 
     public static class Main {
@@ -103,6 +117,19 @@ public class WeatherResponse {
 
         public void setHumidity(int humidity) {
             this.humidity = humidity;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Main main = (Main) o;
+            return Double.compare(temp, main.temp) == 0 && humidity == main.humidity;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(temp, humidity);
         }
     }
 

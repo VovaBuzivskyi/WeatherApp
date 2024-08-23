@@ -5,7 +5,7 @@
             <PatternLayout pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n}{TRACE= white}" disableAnsi="false"/>
         </Console>
 
-        <File name="File" fileName="logs/app.log" append="false">
+        <File name="File" fileName="logs/appLogging.log" append="false">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
@@ -16,7 +16,7 @@
             <AppenderRef ref="File"/>
         </Root>
 
-        <Logger name="com.vovabuzivskyi.weatherapp" level="debug" additivity="false">
+        <Logger name="com.vovabuzivskyi.weatherapp" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Logger>

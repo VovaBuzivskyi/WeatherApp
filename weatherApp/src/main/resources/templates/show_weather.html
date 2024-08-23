@@ -97,18 +97,14 @@
     <button type="submit">Get Weather</button>
 </form>
 
-<div class="container">
+    <div th:if="${weatherData}">
+        <h2>Weather information for </strong> <span th:text="${weatherData.getName()}"></span>
+            ,<span th:text="${weatherData.getSys().getCountry()}"></span></h2>
 
-    <div th:if="${error}" class="error">
-        <p th:text="${error}"></p>
-    </div>
-    <div th:if="${city}">
-        <h2>Weather information for </strong> <span th:text="${city}"></span>,<span th:text="${country}"></span></h2>
-
-        <p><strong>Weather:</strong> <span th:text="${weatherDescription}"></span></p>
-        <p><strong>Temperature:</strong> <span th:text="${temperature} + ' °C'"></span></p>
-        <p><strong>Humidity:</strong> <span th:text="${humidity} + ' %'"></span></p>
-        <p><strong>Wind speed:</strong> <span th:text="${windSpeed} + ' m/s'"></span></p>
+        <p><strong>Weather:</strong> <span th:text="${weatherData.getWeather().get(0).getDescription()}"></span></p>
+        <p><strong>Temperature:</strong> <span th:text="${weatherData.getMain().getTemp()} + ' °C'"></span></p>
+        <p><strong>Humidity:</strong> <span th:text="${weatherData.getMain().getHumidity()} + ' %'"></span></p>
+        <p><strong>Wind speed:</strong> <span th:text="${weatherData.getWind().getSpeed()} + ' m/s'"></span></p>
     </div>
 </div>
 </body>
