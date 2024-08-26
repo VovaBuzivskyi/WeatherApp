@@ -24,10 +24,8 @@ public class WeatherService {
 
     public WeatherResponse getWeather(String city) {
         log.debug("Method getWeather(WeatherService): city = {}", city + " started work");
-        ;
         String weatherUrl = weatherConfig.getWeatherUrl().replace("{city}", city).replace("{apiKey}", weatherConfig.getApiKey());
         log.debug("Weather received from weather API for city: {}", city);
         return restTemplateBuilder.build().getForObject(weatherUrl, WeatherResponse.class);
     }
-
 }

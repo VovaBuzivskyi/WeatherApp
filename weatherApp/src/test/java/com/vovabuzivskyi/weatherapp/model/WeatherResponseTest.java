@@ -10,190 +10,186 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeatherResponseTest {
+
     WeatherResponse weatherResponse;
     WeatherResponse.Weather weather;
     WeatherResponse.Main main;
     WeatherResponse.Wind wind;
     WeatherResponse.Sys sys;
-
-    @Test
-    void testSysGetCountry(){
-       assertEquals("UA",sys.getCountry());
-    }
-
-    @Test
-    void testSysSetCountry(){
-        sys.setCountry("Any Country");
-
-        assertEquals("Any Country",sys.getCountry());
-    }
-
-    @Test
-    void testWeatherGetId (){
-        assertEquals(1,weather.getId());
-    }
-
-    @Test
-    void testWeatherSetId (){
-        weather.setId(3);
-
-        assertEquals(3,weather.getId());
-    }
-
-    @Test
-    void testWeatherGetDescription (){
-        assertEquals("Description",weather.getDescription());
-    }
-
-    @Test
-    void testWeatherSetDescription (){
-        weather.setDescription("Another Description");
-        assertEquals("Another Description",weather.getDescription());
-    }
-
-    @Test
-    void testMainGetTemp(){
-        assertEquals(Math.round(303.15-273.15),main.getTemp());
-    }
-
-    @Test
-    void testMainSetTemp(){
-        main.setTemp(298.15);
-
-        assertEquals(Math.round(298.15-273.15),main.getTemp());
-    }
-
-    @Test
-    void testMainGetHumidity(){
-        assertEquals(52,main.getHumidity());
-    }
-
-    @Test
-    void testMainSetHumidity(){
-        main.setHumidity(61);
-
-        assertEquals(61,main.getHumidity());
-    }
-
-    @Test
-    void testWindGetSpeed(){
-        assertEquals(1,wind.getSpeed());
-    }
-
-    @Test
-    void testWindSetSpeed(){
-        wind.setSpeed(4.3);
-
-        assertEquals(4.3,wind.getSpeed());
-    }
-
-
+    List<WeatherResponse.Weather> weatherList;
 
     @BeforeEach
     void setUp() {
-        weatherResponse = new WeatherResponse();
-        weatherResponse.setName("City");
-
         sys = new WeatherResponse.Sys();
         sys.setCountry("UA");
-        weatherResponse.setSys(sys);
 
         weather = new WeatherResponse.Weather();
         weather.setId(1);
         weather.setDescription("Description");
-        List<WeatherResponse.Weather> weatherList = new ArrayList<>();
+
+        weatherList= new ArrayList<>();
         weatherList.add(weather);
-        weatherResponse.setWeather(weatherList);
 
         main = new WeatherResponse.Main();
         main.setTemp(303.15);
         main.setHumidity(52);
-        weatherResponse.setMain(main);
 
         wind = new WeatherResponse.Wind();
         wind.setSpeed(1);
+
+        weatherResponse = new WeatherResponse();
+        weatherResponse.setName("City");
+        weatherResponse.setSys(sys);
+        weatherResponse.setWeather(weatherList);
+        weatherResponse.setMain(main);
         weatherResponse.setWind(wind);
     }
 
     @Test
-    void getName() {
+    void TestGetName() {
         assertEquals("City", weatherResponse.getName());
     }
 
     @Test
-    void setName() {
+    void testSetName() {
         weatherResponse.setName("BigCity");
 
         assertEquals("BigCity", weatherResponse.getName());
     }
 
     @Test
-    void getSys() {
-        assertEquals("UA", weatherResponse.getSys().getCountry());
+    void testSysGetCountry() {
+        assertEquals("UA", sys.getCountry());
     }
 
     @Test
-    void setSys() {
-        WeatherResponse.Sys sys = new WeatherResponse.Sys();
-        sys.setCountry("Country");
-        weatherResponse.setSys(sys);
+    void testSysSetCountry() {
+        sys.setCountry("Any Country");
 
+        assertEquals("Any Country", sys.getCountry());
+    }
+
+    @Test
+    void testWeatherGetId() {
+        assertEquals(1, weather.getId());
+    }
+
+    @Test
+    void testWeatherSetId() {
+        weather.setId(3);
+
+        assertEquals(3, weather.getId());
+    }
+
+    @Test
+    void testWeatherGetDescription() {
+        assertEquals("Description", weather.getDescription());
+    }
+
+    @Test
+    void testWeatherSetDescription() {
+        weather.setDescription("Another Description");
+
+        assertEquals("Another Description", weather.getDescription());
+    }
+
+    @Test
+    void testMainGetTemp() {
+        assertEquals(Math.round(303.15 - 273.15), main.getTemp());
+    }
+
+    @Test
+    void testMainSetTemp() {
+        main.setTemp(298.15);
+
+        assertEquals(Math.round(298.15 - 273.15), main.getTemp());
+    }
+
+    @Test
+    void testMainGetHumidity() {
+        assertEquals(52, main.getHumidity());
+    }
+
+    @Test
+    void testMainSetHumidity() {
+        main.setHumidity(61);
+
+        assertEquals(61, main.getHumidity());
+    }
+
+    @Test
+    void testWindGetSpeed() {
+        assertEquals(1, wind.getSpeed());
+    }
+
+    @Test
+    void testWindSetSpeed() {
+        wind.setSpeed(4.3);
+
+        assertEquals(4.3, wind.getSpeed());
+    }
+
+    @Test
+    void testGetSys() {
         assertEquals(sys, weatherResponse.getSys());
     }
 
     @Test
-    void getWeather() {
-         WeatherResponse.Weather weatherInMethod = new WeatherResponse.Weather();
-         weatherInMethod.setId(1);
-         weatherInMethod.setDescription("Description");
-         List<WeatherResponse.Weather> weatherList = new ArrayList<>();
-         weatherList.add(weatherInMethod);
+    void testSetSys() {
+        WeatherResponse.Sys sysInMethodSetSys = new WeatherResponse.Sys();
+        sys.setCountry("Country");
 
-         assertArrayEquals(weatherList.toArray(), weatherResponse.getWeather().toArray());
+        weatherResponse.setSys(sysInMethodSetSys);
+
+        assertEquals(sysInMethodSetSys, weatherResponse.getSys());
     }
 
     @Test
-    void setWeather() {
-        WeatherResponse.Weather weather = new WeatherResponse.Weather();
-        weather.setId(2);
-        weather.setDescription("Second Description");
-        List<WeatherResponse.Weather> weatherList = new ArrayList<>();
-        weatherList.add(weather);
-        weatherResponse.setWeather(weatherList);
-
+    void testGetWeather() {
         assertArrayEquals(weatherList.toArray(), weatherResponse.getWeather().toArray());
     }
 
     @Test
-    void getMain() {
-        WeatherResponse.Main mainInMethod = new WeatherResponse.Main();
-        mainInMethod.setTemp(303.15);
-        mainInMethod.setHumidity(52);
+    void testSetWeather() {
+        WeatherResponse.Weather weather = new WeatherResponse.Weather();
+        weather.setId(2);
+        weather.setDescription("Description");
+        List<WeatherResponse.Weather> weatherListInMethodSetWeather = new ArrayList<>();
+        weatherListInMethodSetWeather.add(weather);
 
-        assertEquals(mainInMethod, weatherResponse.getMain());
+        weatherResponse.setWeather(weatherListInMethodSetWeather);
+
+        assertArrayEquals(weatherListInMethodSetWeather.toArray(), weatherResponse.getWeather().toArray());
     }
 
     @Test
-    void setMain() {
-        WeatherResponse.Main mainInMethod2= new WeatherResponse.Main();
-        mainInMethod2.setTemp(21.50);
-        mainInMethod2.setHumidity(56);
-        weatherResponse.setMain(mainInMethod2);
-
-        assertEquals(mainInMethod2, weatherResponse.getMain());
+    void testGetMain() {
+        assertEquals(main, weatherResponse.getMain());
     }
 
     @Test
-    void getWind() {
-        assertEquals(1,weatherResponse.getWind().getSpeed());
+    void testSetMain() {
+        WeatherResponse.Main mainInMethod2SetMain = new WeatherResponse.Main();
+        mainInMethod2SetMain.setTemp(21.50);
+        mainInMethod2SetMain.setHumidity(56);
+        weatherResponse.setMain(mainInMethod2SetMain);
+
+        assertEquals(mainInMethod2SetMain, weatherResponse.getMain());
     }
 
     @Test
-    void setWind() {
-        WeatherResponse.Wind windInMethod = new WeatherResponse.Wind();
-        windInMethod.setSpeed(5);
-        weatherResponse.setWind(windInMethod);
-
-        assertEquals(5,weatherResponse.getWind().getSpeed());
+    void testGetWind() {
+        assertEquals(wind, weatherResponse.getWind());
     }
+
+    @Test
+    void testSetWind() {
+        WeatherResponse.Wind windInMethodSetWind = new WeatherResponse.Wind();
+        windInMethodSetWind.setSpeed(5);
+
+        weatherResponse.setWind(windInMethodSetWind);
+
+        assertEquals(windInMethodSetWind, weatherResponse.getWind());
+    }
+
 }

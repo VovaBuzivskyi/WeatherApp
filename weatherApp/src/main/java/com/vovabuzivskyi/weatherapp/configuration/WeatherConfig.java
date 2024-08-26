@@ -11,14 +11,6 @@ public class WeatherConfig {
     private String weatherUrl;
     private String forecastUrl;
 
-    public String getForecastUrl() {
-        return forecastUrl;
-    }
-
-    public void setForecastUrl(String forecastUrl) {
-        this.forecastUrl = forecastUrl;
-    }
-
     public String getApiKey() {
         return apiKey;
     }
@@ -33,5 +25,13 @@ public class WeatherConfig {
 
     public void setWeatherUrl(String url) {
         this.weatherUrl = url;
+    }
+
+    public String getForecastUrl() {
+        return forecastUrl;
+    }
+
+    public void setForecastUrl(String forecastUrl) {
+        this.forecastUrl = forecastUrl;
     }
 }

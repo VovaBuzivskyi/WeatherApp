@@ -2,7 +2,6 @@ package com.vovabuzivskyi.weatherapp.model;
 
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class WeatherResponse {
@@ -85,18 +84,6 @@ public class WeatherResponse {
             this.description = description;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Weather weather = (Weather) o;
-            return id == weather.id && Objects.equals(description, weather.description);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(id, description);
-        }
     }
 
     public static class Main {
@@ -119,18 +106,6 @@ public class WeatherResponse {
             this.humidity = humidity;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Main main = (Main) o;
-            return Double.compare(temp, main.temp) == 0 && humidity == main.humidity;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(temp, humidity);
-        }
     }
 
     public static class Wind {

@@ -23,10 +23,11 @@ public class ForecastResponse {
         this.city = city;
     }
 
-    static class City {
+    public static class City {
         private int id;
         private String name;
-        private String country;;
+        private String country;
+        ;
 
         public int getId() {
             return id;
@@ -91,11 +92,11 @@ public class ForecastResponse {
         public void setDt_txt(String dt_txt) {
             this.dt_txt = dt_txt;
         }
+
     }
 
-    static class Main {
+    public static class Main {
         private double temp;
-        private double feels_like;
         private int pressure;
         private int humidity;
 
@@ -117,16 +118,8 @@ public class ForecastResponse {
             this.pressure = pressure;
         }
 
-        public double getFeels_like() {
-            return feels_like;
-        }
-
-        public void setFeels_like(double feels_like) {
-            this.feels_like = feels_like;
-        }
-
-        public int getTemp() {
-            return (int) Math.round(temp);
+        public double getTemp() {
+            return Math.round(temp);
         }
 
         public void setTemp(double temp) {
@@ -134,7 +127,7 @@ public class ForecastResponse {
         }
     }
 
-    static class Weather {
+    public static class Weather {
         private int id;
         private String description;
 
@@ -157,7 +150,7 @@ public class ForecastResponse {
 
     }
 
-    static class Wind {
+    public static class Wind {
         private double speed;
 
         public double getSpeed() {
